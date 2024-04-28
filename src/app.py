@@ -10,10 +10,10 @@ from components.general.navbar import navbar
 
 app = Dash(__name__,
            title="PID",
-           meta_tags=[{"name": "viewport", "content": "width=device-width"}],
            # external_scripts=[{'src': 'https://cdn.tailwindcss.com'}],
            external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP],
-           use_pages=True)
+           use_pages=True,
+           )
 
 app._favicon = "/assets/icons/favicon.ico"
 
