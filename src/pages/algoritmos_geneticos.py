@@ -4,6 +4,9 @@ import pandas as pd
 import plotly.express as px
 import dash_bootstrap_components as dbc
 import dash_player
+from src.components.algoritmos_geneticos.alg_gen_input import alg_gen_input
+from src.components.algoritmos_geneticos.ag_title import ag_title
+from src.components.algoritmos_geneticos.modal_video import modal_video
 
 dash.register_page(__name__,
                    path="/algoritmosgeneticos/",
@@ -12,14 +15,28 @@ dash.register_page(__name__,
                    name="Algoritmos Genéticos")
 
 layout = dbc.Container([
-    html.H2(children='Algoritmos Genéticos: El Problema de la Mochila', style={'textAlign': 'center'}),
-    html.Center(dash_player.DashPlayer(
-        id="player",
-        url="https://www.youtube.com/embed/86DaXndBVI4?si=0L_aEhS9GHdQBDB6",
-        controls=True,
-        width="80%",
-        height="500px",
-    )),
+    html.Center(html.H1('Algoritmos Genéticos')),
+    html.Center(html.Img(src="../assets/images/backpack.png", style={"width": "25%"})),
+    ag_title(),
+    modal_video(),
     html.Hr(),
-    html.H2(children='Simulación', style={'textAlign': 'center'}),
+    alg_gen_input()
 ])
+
+
+@callback(
+    Output("modal_video", "is_open", allow_duplicate=True),
+    Input("btn_abrir_modal_video", "n_clicks"),
+    prevent_initial_call=True
+)
+def mostrar_modal(n_clicks):
+    return True
+
+
+@callback(
+    Output("modal_video", "is_open", allow_duplicate=True),
+    Input("btn_cerrar_modal_video", "n_clicks"),
+    prevent_initial_call=True
+)
+def mostrar_modal(n_clicks):
+    return False
