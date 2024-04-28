@@ -5,88 +5,93 @@ from src.components.algoritmos_geneticos.tabla_individuos import tabla_individuo
 
 
 def alg_gen_input():
-    input = dbc.Tabs([
+    input = (
+        dbc.Card([
+            dbc.CardHeader([
+                dbc.Tabs([dbc.Tab(label="Parámetros del algoritmo", tab_id='tab_parametros')]),
+            ]),
+            dbc.CardBody([
+                dbc.Row([
 
-        # Definicion de objetos e individuos
-        dbc.Tab(dbc.Card(dbc.CardBody([
+                    # Objetos
+                    dbc.Col([
+                        tabla_objetos()
+                    ], className='col-3 border-right equal-height-col'),
 
-            dbc.Row([
+                    # Individuos
+                    dbc.Col([
+                        tabla_individuos()
+                    ], className='col-3 equal-height-col'),
 
-                # Objetos
-                dbc.Col([
-                    tabla_objetos()
-                ], className='col-3 border-right equal-height-col'),
+                    # Inputs
+                    dbc.Col([
 
-                # Individuos
-                dbc.Col([
-                    tabla_individuos()
-                ], className='col-3 equal-height-col'),
+                        # Peso maximo de la mochila y probabilidad de cruce
+                        dbc.Row([
+                            dbc.Col(
+                                dbc.FormFloating([
+                                    dbc.Input(id="in_peso_mochila", placeholder="Peso máximo de la Mochila",
+                                              type="number",
+                                              min=1, value=15, required=True, step=1),
+                                    dbc.Label("Peso máximo de la Mochila")
+                                ])
+                            ),
 
-                # Inputs
-                dbc.Col([
+                            dbc.Col(
+                                dbc.FormFloating([
+                                    dbc.Input(id="in_probabilidad_cruce", placeholder="Probabilidad de Cruce",
+                                              type="number",
+                                              min=0, value=0.98, required=True, max=1, step=0.01),
+                                    dbc.Label("Probabilidad de Cruce")
+                                ])
+                            )
+                        ]),
 
-                    # Peso maximo de la mochila y probabilidad de cruce
-                    dbc.Row([
-                        dbc.Col(
-                            dbc.FormFloating([
-                                dbc.Input(id="in_peso_mochila", placeholder="Peso máximo de la Mochila", type="number",
-                                          min=1, value=15, required=True, step=1),
-                                dbc.Label("Peso máximo de la Mochila")
-                            ])
-                        ),
+                        # Mutacion e iteraciones
+                        dbc.Row([
+                            dbc.Col(
+                                dbc.FormFloating([
+                                    dbc.Input(id="in_probabilidad_mutacion", placeholder="Probabilidad de Mutación",
+                                              type="number",
+                                              min=0, value=0.1, required=True, max=1, step=0.01),
+                                    dbc.Label("Probabilidad de Mutación")
+                                ], className='mt-2')
+                            ),
+                            dbc.Col(
+                                dbc.FormFloating([
+                                    dbc.Input(id="in_cantidad_iteraciones", placeholder="Cantidad de Iteraciones",
+                                              type="number",
+                                              min=1, value=5, required=True, max=100, step=1),
+                                    dbc.Label("Cantidad de Iteraciones")
+                                ], className='mt-2')
+                            )
+                        ]),
 
-                        dbc.Col(
-                            dbc.FormFloating([
-                                dbc.Input(id="in_probabilidad_cruce", placeholder="Probabilidad de Cruce",
-                                          type="number",
-                                          min=0, value=0.98, required=True, max=1, step=0.01),
-                                dbc.Label("Probabilidad de Cruce")
-                            ])
-                        )
-                    ]),
+                        # Botones
+                        dbc.Row([
 
-                    # Mutacion e iteraciones
-                    dbc.Row([
-                        dbc.Col(
-                            dbc.FormFloating([
-                                dbc.Input(id="in_probabilidad_mutacion", placeholder="Probabilidad de Mutación",
-                                          type="number",
-                                          min=0, value=0.1, required=True, max=1, step=0.01),
-                                dbc.Label("Probabilidad de Mutación")
-                            ], className='mt-2')
-                        ),
-                        dbc.Col(
-                            dbc.FormFloating([
-                                dbc.Input(id="in_cantidad_iteraciones", placeholder="Cantidad de Iteraciones",
-                                          type="number",
-                                          min=1, value=5, required=True, max=100, step=1),
-                                dbc.Label("Cantidad de Iteraciones")
-                            ], className='mt-2')
-                        )
-                    ]),
+                            dbc.Col([
+                                dbc.Button("Generar bits aleatorios",
+                                           id="btn_alg_gen_bits_random",
+                                           color="primary",
+                                           )
+                            ], width='auto', className='mt-auto'),
 
-                    # Botones
-                    dbc.Row([
+                            dbc.Col([
+                                dbc.Button("Ejecutar algoritmo",
+                                           id="btn_alg_gen_ejecutar",
+                                           color="primary")
+                            ], width='auto', className='align-self-end'),
 
-                        dbc.Col([
-                            dbc.Button("Generar bits aleatorios",
-                                       id="btn_alg_gen_bits_random",
-                                       color="primary",
-                                       )
-                        ], className='col-4'),
+                        ], justify='end', className='align-self-end'),
 
-                        dbc.Col([
-                            dbc.Button("Generar simulación",
-                                       id="btn_alg_gen_simular",
-                                       color="primary")
-                        ], className='ml-2 col-4'),
+                    ], className='col-6')
 
-                    ], className='justify-content-end'),
-
-                ], className='col-6 equal-height-col')
+                ], className='equal-height-col align-items-stretch d-flex my-auto')
             ])
+        ])
+    )
 
-        ])), label="Parámetros del algoritmo")
-    ])
+    # TODO: Añadir semillas para simulación
 
     return input

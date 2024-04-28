@@ -49,7 +49,7 @@ def tabla_individuos():
     ]
 
     grid = dag.AgGrid(
-        id="tabla_objetos",
+        id="tabla_individuos",
         columnDefs=columnas,
         rowData=data,
         columnSize="sizeToFit",
