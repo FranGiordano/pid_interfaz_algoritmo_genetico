@@ -8,7 +8,7 @@ def alg_gen_input():
     parametros = (
         dbc.Card([
             dbc.CardHeader([
-                dbc.Tabs([dbc.Tab(label="Parámetros del algoritmo", tab_id='tab_parametros')]),
+                html.Strong("Parámetros del algoritmo"),
             ]),
             dbc.CardBody([
                 dbc.Row([

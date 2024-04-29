@@ -8,7 +8,6 @@ class ErrorPoblacionConIndividuosMuertos(Exception):
 
 
 class Individuo:
-
     class Estado(Enum):
         VIVO = 1
         MUERTO = 2
@@ -79,7 +78,8 @@ class Individuo:
 class Cruzador:
 
     # Constructor
-    def __init__(self, probabilidad_cruce, probabilidad_mutacion, utilidades, pesos, peso_maximo, nro_poblacion_padres, nro_cruce):
+    def __init__(self, probabilidad_cruce, probabilidad_mutacion, utilidades, pesos, peso_maximo, nro_poblacion_padres,
+                 nro_cruce):
         self.__probabilidad_cruce = probabilidad_cruce
         self.__probabilidad_mutacion = probabilidad_mutacion
         self.__utilidades = utilidades
@@ -147,7 +147,7 @@ class Cruzador:
     def __seleccionar_padres(self, individuos, prob_acum, prob):
 
         for i in range(1, 4):
-            if prob_acum[i-1] < prob < prob_acum[i]:
+            if prob_acum[i - 1] < prob < prob_acum[i]:
                 bits_individuo_padre = individuos[i].get_bits()
                 nro_ind_padre = i + 1
                 break
@@ -169,23 +169,35 @@ class Cruzador:
     # Metodos publicos
     def cruzar(self, individuos, prob_acum):
 
-        self.__bits_individuo_padre1, self.__nro_ind_padre1 = self.__seleccionar_padres(self, individuos, prob_acum, self.__prob_ind_1)
-        self.__bits_individuo_padre2, self.__nro_ind_padre2 = self.__seleccionar_padres(self, individuos, prob_acum, self.__prob_ind_2)
+        self.__bits_individuo_padre1, self.__nro_ind_padre1 = self.__seleccionar_padres(self, individuos, prob_acum,
+                                                                                        self.__prob_ind_1)
+        self.__bits_individuo_padre2, self.__nro_ind_padre2 = self.__seleccionar_padres(self, individuos, prob_acum,
+                                                                                        self.__prob_ind_2)
 
         if self.__prob_cruce >= self.__probabilidad_cruce:
-            individuo_hijo1 = Individuo(self.__bits_individuo_padre1, self.__utilidades, self.__pesos, self.__peso_maximo)
-            individuo_hijo2 = Individuo(self.__bits_individuo_padre2, self.__utilidades, self.__pesos, self.__peso_maximo)
+            individuo_hijo1 = Individuo(self.__bits_individuo_padre1, self.__utilidades, self.__pesos,
+                                        self.__peso_maximo)
+            individuo_hijo2 = Individuo(self.__bits_individuo_padre2, self.__utilidades, self.__pesos,
+                                        self.__peso_maximo)
             self.__cruzo = False
         else:
             self.__punto_corte = rd.random()
-            self.__bits_padre_1_izq, self.__bits_padre_1_der = self.__cortar_individuo(self.__bits_individuo_padre1, self.__punto_corte)
-            self.__bits_padre_2_izq, self.__bits_padre_2_der = self.__cortar_individuo(self.__bits_individuo_padre2, self.__punto_corte)
-            individuo_hijo1 = Individuo([*self.__bits_padre_1_izq, *self.__bits_padre_2_der], self.__utilidades, self.__pesos, self.__peso_maximo)
-            individuo_hijo2 = Individuo([*self.__bits_padre_2_izq, *self.__bits_padre_1_der], self.__utilidades, self.__pesos, self.__peso_maximo)
+            self.__bits_padre_1_izq, self.__bits_padre_1_der = self.__cortar_individuo(self.__bits_individuo_padre1,
+                                                                                       self.__punto_corte)
+            self.__bits_padre_2_izq, self.__bits_padre_2_der = self.__cortar_individuo(self.__bits_individuo_padre2,
+                                                                                       self.__punto_corte)
+            individuo_hijo1 = Individuo([*self.__bits_padre_1_izq, *self.__bits_padre_2_der], self.__utilidades,
+                                        self.__pesos, self.__peso_maximo)
+            individuo_hijo2 = Individuo([*self.__bits_padre_2_izq, *self.__bits_padre_1_der], self.__utilidades,
+                                        self.__pesos, self.__peso_maximo)
             self.__cruzo = True
 
-        self.__probabilidad_mutaciones_1 = individuo_hijo1.mutar_individuo(self.__probabilidad_mutacion, self.__utilidades, self.__pesos, self.__peso_maximo)
-        self.__probabilidad_mutaciones_2 = individuo_hijo2.mutar_individuo(self.__probabilidad_mutacion, self.__utilidades, self.__pesos, self.__peso_maximo)
+        self.__probabilidad_mutaciones_1 = individuo_hijo1.mutar_individuo(self.__probabilidad_mutacion,
+                                                                           self.__utilidades, self.__pesos,
+                                                                           self.__peso_maximo)
+        self.__probabilidad_mutaciones_2 = individuo_hijo2.mutar_individuo(self.__probabilidad_mutacion,
+                                                                           self.__utilidades, self.__pesos,
+                                                                           self.__peso_maximo)
         self.__bits_individuo_hijo1 = individuo_hijo1.get_bits()
         self.__bits_individuo_hijo2 = individuo_hijo2.get_bits()
         self.__peso_hijo1 = individuo_hijo1.get_peso()
@@ -356,7 +368,6 @@ class AlgGenMochila:
 
 
 if __name__ == '__main__':
-
     utilidades = [1, 2, 3, 4]
     pesos = [1, 2, 3, 4]
     capacidad_mochila = 7
@@ -366,9 +377,11 @@ if __name__ == '__main__':
     semilla = 0
     cantidad_iteraciones = 2
 
-    alg_gen = AlgGenMochila(utilidades, pesos, capacidad_mochila, probabilidad_cruce, probabilidad_mutacion, matriz_individuos, semilla)
+    alg_gen = AlgGenMochila(utilidades, pesos, capacidad_mochila, probabilidad_cruce, probabilidad_mutacion,
+                            matriz_individuos, semilla)
     alg_gen.run(cantidad_iteraciones)
 
     import json
+
     with open('result.json', 'w') as fp:
         json.dump(alg_gen.get_data(), fp)

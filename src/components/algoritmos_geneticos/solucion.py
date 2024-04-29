@@ -24,6 +24,8 @@ def solucion(data):
 
     poblaciones = data['Poblaciones']
     cruces = data['Cruces']
+    nro_poblacion = 1
+    cantidad_iteraciones = len(poblaciones) - 1
 
     resultado = [
 
@@ -55,11 +57,17 @@ def solucion(data):
         dbc.Card([
             dbc.CardHeader(html.Strong("Iteraciones")),
             dbc.CardBody([
-                # iteracion(poblaciones, cruces, nro_poblacion)
+                dbc.Pagination(max_value=cantidad_iteraciones,
+                               fully_expanded=False,
+                               id='paginacion-iteraciones',
+                               className='justify-content-center'),
+                iteracion(poblaciones, cruces, nro_poblacion)
             ])
         ]),
 
-        html.Br()
+        html.Br(),
+
+
 
     ]
 

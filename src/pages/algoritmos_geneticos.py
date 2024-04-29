@@ -20,7 +20,8 @@ layout = dbc.Container([
     modal_video(),
     html.Br(),
     alg_gen_input(),
-    html.Div(id="output_alg_gen")
+    html.Div(id="output_alg_gen"),
+    dcc.Store(id='data_store'),
 ])
 
 
