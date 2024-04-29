@@ -20,6 +20,6 @@ def navbar() -> dbc.Navbar:
             dbc.NavItem(
                 dbc.NavLink(html.Strong("Algoritmos Genéticos"), href="/algoritmosgeneticos/"),
                 class_name="px-3 text-primary")
-        ]), className='shadow-sm'
+        ], style={'minWidth': '1400px'}), className='shadow-sm'
     )
     return barra_navegacion

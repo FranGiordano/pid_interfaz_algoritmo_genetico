@@ -12,4 +12,4 @@ dash.register_page(__name__,
 
 layout = dbc.Container([
     html.H1(children='Introducción de la página', style={'textAlign': 'center'}),
-])
+], style={'minWidth': '1400px'})

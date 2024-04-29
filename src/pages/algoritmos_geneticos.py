@@ -23,7 +23,7 @@ layout = dbc.Container([
     alg_gen_input(),
     html.Div(id="output_alg_gen"),
     dcc.Store(id='data_store'),
-])
+], style={'minWidth': '1400px'})
 
 
 # Mostrar modal
