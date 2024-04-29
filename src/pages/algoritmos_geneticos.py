@@ -8,6 +8,7 @@ import random as rd
 from src.components.algoritmos_geneticos.alg_gen_input import alg_gen_input
 from src.components.algoritmos_geneticos.ag_title import ag_title
 from src.components.algoritmos_geneticos.modal_video import modal_video
+from utils.alg_gen import AlgGenMochila
 
 dash.register_page(__name__,
                    path="/algoritmosgeneticos/",
@@ -19,7 +20,8 @@ layout = dbc.Container([
     ag_title(),
     modal_video(),
     html.Br(),
-    alg_gen_input()
+    alg_gen_input(),
+    html.Div(id="output_alg_gen")
 ])
 
 
@@ -74,9 +76,34 @@ def cargar_boton(n_clicks):
 
 
 # Ejecutar algoritmo y devolver resultados
-"""
 @callback(
+    Output("output_alg_gen", "children"),
+    Output("btn_alg_gen_ejecutar", "children"),
+    Output("btn_alg_gen_ejecutar", "disabled"),
+    Input("btn_alg_gen_ejecutar", "n_clicks"),
+    State("tabla_individuos", "rowData"),
+    State("in_probabilidad_cruce", "value"),
+    State("in_probabilidad_mutacion", "value"),
+    State("in_cantidad_iteraciones", "value"),
+    State("in_semilla", "value"),
+    State('tabla_objetos', 'rowData'),
+    State('in_peso_mochila', 'value'),
+    prevent_initial_call=True
 )
-def cargar_boton():
-    pass
-"""
+def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_iteraciones, semilla, objetos, peso_mochila):
+
+    utilidades, pesos, matriz_individuos = [], [], []
+    for i in range(4):
+        utilidades.append(objetos[i]['Utilidad'])
+        pesos.append(objetos[i]['Peso'])
+        matriz_individuos.append([individuos[i]['1'], individuos[i]['2'], individuos[i]['3'], individuos[i]['4']])
+
+    ag = AlgGenMochila(utilidades, pesos, peso_mochila, prob_cruce, prob_mutacion, matriz_individuos, semilla)
+    ag.run(cant_iteraciones)
+    data = ag.get_data()
+
+    import json
+    with open('result.json', 'w') as fp:
+        json.dump(data, fp)
+
+    return data, "Ejecutar algoritmo", False

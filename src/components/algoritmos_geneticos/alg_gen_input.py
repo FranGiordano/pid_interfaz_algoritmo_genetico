@@ -31,8 +31,7 @@ def alg_gen_input():
                             dbc.Col(
                                 dbc.FormFloating([
                                     dbc.Input(id="in_peso_mochila", placeholder="Peso máximo de la Mochila",
-                                              type="number",
-                                              min=1, value=15, required=True, step=1),
+                                              type="number", min=1, value=15, max=100, required=True, step=1),
                                     dbc.Label("Peso máximo de la Mochila")
                                 ])
                             ),
@@ -61,9 +60,23 @@ def alg_gen_input():
                                 dbc.FormFloating([
                                     dbc.Input(id="in_cantidad_iteraciones", placeholder="Cantidad de Iteraciones",
                                               type="number",
-                                              min=1, value=5, required=True, max=100, step=1),
+                                              min=1, value=5, required=True, max=15, step=1),
                                     dbc.Label("Cantidad de Iteraciones")
                                 ], className='mt-2')
+                            )
+                        ]),
+
+                        # Semilla
+                        dbc.Row([
+                            dbc.Col(
+                                dbc.FormFloating([
+                                    dbc.Input(id="in_semilla", placeholder="Semilla de Aleatoriedad",
+                                              type="number",
+                                              min=-1000, value=0, required=True, max=1000, step=1),
+                                    dbc.Label("Semilla de Aleatoriedad")
+                                ], className='mt-2')
+                            ),
+                            dbc.Col(
                             )
                         ]),
 
@@ -73,13 +86,13 @@ def alg_gen_input():
                             dbc.Button("Generar bits aleatorios",
                                        id="btn_alg_gen_bits_random",
                                        color="primary",
-                                       className='mx-3 mt-5'
+                                       className='mx-3'
                                        ),
 
                             dbc.Button("Ejecutar algoritmo",
                                        id="btn_alg_gen_ejecutar",
                                        color="primary",
-                                       className='mt-5')
+                                       className='')
 
                         ], className='d-flex justify-content-end mt-5'),
 
@@ -89,7 +102,5 @@ def alg_gen_input():
             ])
         ])
     )
-
-    # TODO: Añadir semillas para simulación
 
     return input
