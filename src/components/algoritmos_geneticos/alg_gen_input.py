@@ -1,11 +1,11 @@
 import dash_bootstrap_components as dbc
-from dash import dash_table, html
+from dash import dash_table, html, dcc
 from src.components.algoritmos_geneticos.tabla_objetos import tabla_objetos
 from src.components.algoritmos_geneticos.tabla_individuos import tabla_individuos
 
 
 def alg_gen_input():
-    input = (
+    parametros = (
         dbc.Card([
             dbc.CardHeader([
                 dbc.Tabs([dbc.Tab(label="Parámetros del algoritmo", tab_id='tab_parametros')]),
@@ -60,7 +60,7 @@ def alg_gen_input():
                                 dbc.FormFloating([
                                     dbc.Input(id="in_cantidad_iteraciones", placeholder="Cantidad de Iteraciones",
                                               type="number",
-                                              min=1, value=5, required=True, max=15, step=1),
+                                              min=1, value=15, required=True, max=100, step=1),
                                     dbc.Label("Cantidad de Iteraciones")
                                 ], className='mt-2')
                             )
@@ -71,8 +71,7 @@ def alg_gen_input():
                             dbc.Col(
                                 dbc.FormFloating([
                                     dbc.Input(id="in_semilla", placeholder="Semilla de Aleatoriedad",
-                                              type="number",
-                                              min=-1000, value=0, required=True, max=1000, step=1),
+                                              type="number", min=-1000, value=0, required=True, max=1000, step=1),
                                     dbc.Label("Semilla de Aleatoriedad")
                                 ], className='mt-2')
                             ),
@@ -104,4 +103,4 @@ def alg_gen_input():
         ])
     )
 
-    return input
+    return parametros

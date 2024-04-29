@@ -4,10 +4,10 @@ import pandas as pd
 
 def tabla_individuos():
     data = [
-        {'Individuo': 'Individuo 1', '1': 0, '2': 0, '3': 0, '4': 0},
-        {'Individuo': 'Individuo 2', '1': 0, '2': 0, '3': 0, '4': 0},
-        {'Individuo': 'Individuo 3', '1': 0, '2': 0, '3': 0, '4': 0},
-        {'Individuo': 'Individuo 4', '1': 0, '2': 0, '3': 0, '4': 0},
+        {'Individuo': 'Individuo 1', '1': 1, '2': 1, '3': 0, '4': 0},
+        {'Individuo': 'Individuo 2', '1': 0, '2': 1, '3': 1, '4': 0},
+        {'Individuo': 'Individuo 3', '1': 0, '2': 0, '3': 1, '4': 1},
+        {'Individuo': 'Individuo 4', '1': 1, '2': 0, '3': 0, '4': 1},
     ]
 
     columnas = [
@@ -55,7 +55,7 @@ def tabla_individuos():
         columnSize="sizeToFit",
         dashGridOptions={"domLayout": "autoHeight"},
         style={"height": None},
-        defaultColDef={"resizeable": False, "sortable": False}
+        defaultColDef={"resizable": False, "sortable": False, 'suppressMovable': True}
     )
 
     return grid

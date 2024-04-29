@@ -2,6 +2,8 @@ import dash
 from dash import html, callback, Input, Output, dcc, State
 import dash_bootstrap_components as dbc
 import random as rd
+
+from components.algoritmos_geneticos.solucion import solucion
 from src.components.algoritmos_geneticos.alg_gen_input import alg_gen_input
 from src.components.algoritmos_geneticos.ag_title import ag_title
 from src.components.algoritmos_geneticos.modal_video import modal_video
@@ -94,27 +96,22 @@ def cargar_boton(n_clicks):
 )
 def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_iteraciones, semilla, objetos, peso_mochila):
 
-    if None in (prob_cruce, prob_mutacion, cant_iteraciones, semilla, peso_mochila):
-        error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
-                 'Por favor revise que ningún parámetro esté vacío o incompleto.')
-        return {}, "Ejecutar algoritmo", False, True, error
-
-    if prob_cruce < 0 or prob_cruce > 1 or prob_mutacion < 0 or prob_mutacion > 1:
+    if None in (prob_cruce, prob_mutacion) or prob_cruce < 0 or prob_cruce > 1 or prob_mutacion < 0 or prob_mutacion > 1:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'Las probabilidades de cruce y mutación deben estar entre 0 y 1.')
         return {}, "Ejecutar algoritmo", False, True, error
 
-    if cant_iteraciones < 1 or cant_iteraciones > 15:
+    if cant_iteraciones is None or cant_iteraciones < 1 or cant_iteraciones > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
-                 'La cantidad de iteraciones debe estar entre 1 y 15.')
+                 'La cantidad de iteraciones debe estar entre 1 y 100.')
         return {}, "Ejecutar algoritmo", False, True, error
 
-    if semilla < -1000 or semilla > 1000:
+    if semilla is None or semilla < -1000 or semilla > 1000:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'La semilla de aleatoriedad debe estar entre -1000 y 1000.')
         return {}, "Ejecutar algoritmo", False, True, error
 
-    if peso_mochila < 1 or peso_mochila > 100:
+    if peso_mochila is None or peso_mochila < 1 or peso_mochila > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'El peso máximo de la mochila debe estar entre 1 y 100.')
         return {}, "Ejecutar algoritmo", False, True, error
@@ -147,4 +144,6 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
     ag.run(cant_iteraciones)
     data = ag.get_data()
 
-    return 'Procesado', "Ejecutar algoritmo", False, False, ''
+    resultado = solucion(data)
+
+    return resultado, "Ejecutar algoritmo", False, False, ''

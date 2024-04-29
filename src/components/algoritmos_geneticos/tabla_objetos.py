@@ -40,7 +40,7 @@ def tabla_objetos():
         columnSize="sizeToFit",
         dashGridOptions={"domLayout": "autoHeight"},
         style={"height": None},
-        defaultColDef={"resizeable": False, "sortable": False}
+        defaultColDef={"resizable": False, "sortable": False, 'suppressMovable': True}
     )
 
     return grid
