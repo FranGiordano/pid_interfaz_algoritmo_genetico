@@ -68,26 +68,24 @@ def alg_gen_input():
                         ]),
 
                         # Botones
-                        dbc.Row([
+                        html.Div([
 
-                            dbc.Col([
-                                dbc.Button("Generar bits aleatorios",
-                                           id="btn_alg_gen_bits_random",
-                                           color="primary",
-                                           )
-                            ], width='auto', className='mt-auto'),
+                            dbc.Button("Generar bits aleatorios",
+                                       id="btn_alg_gen_bits_random",
+                                       color="primary",
+                                       className='mx-3 mt-5'
+                                       ),
 
-                            dbc.Col([
-                                dbc.Button("Ejecutar algoritmo",
-                                           id="btn_alg_gen_ejecutar",
-                                           color="primary")
-                            ], width='auto', className='align-self-end'),
+                            dbc.Button("Ejecutar algoritmo",
+                                       id="btn_alg_gen_ejecutar",
+                                       color="primary",
+                                       className='mt-5')
 
-                        ], justify='end', className='align-self-end'),
+                        ], className='d-flex justify-content-end mt-5'),
 
                     ], className='col-6')
 
-                ], className='equal-height-col align-items-stretch d-flex my-auto')
+                ])
             ])
         ])
     )

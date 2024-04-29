@@ -11,4 +11,7 @@
     <orderEntry type="jdk" jdkName="Python 3.12 (pid_interfaz_algoritmo_genetico)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
+  </component>
 </module>
