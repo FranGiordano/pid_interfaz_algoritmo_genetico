@@ -3,6 +3,7 @@ from dash import html, callback, Input, Output, dcc, State
 import dash_bootstrap_components as dbc
 import random as rd
 
+from components.algoritmos_geneticos.iteracion import iteracion
 from components.algoritmos_geneticos.solucion import solucion
 from src.components.algoritmos_geneticos.alg_gen_input import alg_gen_input
 from src.components.algoritmos_geneticos.ag_title import ag_title
@@ -85,6 +86,7 @@ def cargar_boton(n_clicks):
     Output("btn_alg_gen_ejecutar", "disabled"),
     Output('alert_alg_gen', 'is_open'),
     Output('alert_alg_gen', 'children'),
+    Output('data_store', 'data'),
     Input("btn_alg_gen_ejecutar", "n_clicks"),
     State("tabla_individuos", "rowData"),
     State("in_probabilidad_cruce", "value"),
@@ -100,22 +102,22 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
     if None in (prob_cruce, prob_mutacion) or prob_cruce < 0 or prob_cruce > 1 or prob_mutacion < 0 or prob_mutacion > 1:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'Las probabilidades de cruce y mutación deben estar entre 0 y 1.')
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
 
     if cant_iteraciones is None or cant_iteraciones < 1 or cant_iteraciones > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'La cantidad de iteraciones debe estar entre 1 y 100.')
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
 
     if semilla is None or semilla < -1000 or semilla > 1000:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'La semilla de aleatoriedad debe estar entre -1000 y 1000.')
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
 
     if peso_mochila is None or peso_mochila < 1 or peso_mochila > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'El peso máximo de la mochila debe estar entre 1 y 100.')
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
 
     utilidades, pesos, matriz_individuos = [], [], []
 
@@ -129,22 +131,39 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
     except ZeroDivisionError:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'Al menos un individuo debe tener un bit distinto de 0.')
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
     except ErrorPoblacionConIndividuosMuertos:
         error = ''
         for i in range(4):
             if sum([individuos[i]['1']*pesos[0], individuos[i]['2']*pesos[1], individuos[i]['3']*pesos[2], individuos[i]['4']*pesos[3]]) > peso_mochila:
                 error = (f'Ocurrió un error al intentar ejecutar el algoritmo. '
                          f'El individuo {i+1} no debe superar el peso máximo de la mochila.')
-                return {}, "Ejecutar algoritmo", False, True, error
-        return {}, "Ejecutar algoritmo", False, True, error
+                return {}, "Ejecutar algoritmo", False, True, error, {}
+        return {}, "Ejecutar algoritmo", False, True, error, {}
     except Exception as e:
         error = f'Ocurrió un error al intentar ejecutar el algoritmo. {e}'
-        return {}, "Ejecutar algoritmo", False, True, error
+        return {}, "Ejecutar algoritmo", False, True, error, {}
 
     ag.run(cant_iteraciones)
     data = ag.get_data()
 
     resultado = solucion(data)
 
-    return resultado, "Ejecutar algoritmo", False, False, ''
+    return resultado, "Ejecutar algoritmo", False, False, '', data
+
+
+# Paginar iteraciones
+@callback(
+    Output('resultado_iteracion', 'children'),
+    Input('paginacion_iteraciones', 'active_page'),
+    State('data_store', 'data'),
+    prevent_initial_call=True
+)
+def paginar_iteraciones(pagina, data):
+
+    print(data)
+
+    if not data:
+        return {}
+
+    return iteracion(data['Poblaciones'], data['Cruces'], pagina)

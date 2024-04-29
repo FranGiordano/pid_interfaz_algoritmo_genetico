@@ -9,8 +9,10 @@ from components.algoritmos_geneticos.tabla_poblacion import tabla_poblacion
 
 def solucion(data):
 
+    # Datos para la solución
     individuo_solucion = data['Solucion']
 
+    # Datos para la evolución
     evolucion_x, evolucion_y, promedio_y = [], [], []
     for i in data['Poblaciones']:
         suma = 0
@@ -20,8 +22,10 @@ def solucion(data):
             suma += j['Z']
         promedio_y.append(suma/4)
 
+    # Datos para la población final
     poblacion_final = data['Poblaciones'][-1]
 
+    # Datos para la iteración 1
     poblaciones = data['Poblaciones']
     cruces = data['Cruces']
     nro_poblacion = 1
@@ -59,15 +63,13 @@ def solucion(data):
             dbc.CardBody([
                 dbc.Pagination(max_value=cantidad_iteraciones,
                                fully_expanded=False,
-                               id='paginacion-iteraciones',
+                               id='paginacion_iteraciones',
                                className='justify-content-center'),
-                iteracion(poblaciones, cruces, nro_poblacion)
+                html.Div(iteracion(poblaciones, cruces, nro_poblacion), id='resultado_iteracion')
             ])
         ]),
 
         html.Br(),
-
-
 
     ]
 
