@@ -98,7 +98,8 @@ def alg_gen_input():
 
                     ], className='col-6')
 
-                ])
+                ]),
+                dbc.Alert('', id='alert_alg_gen', dismissable=True, color='danger', is_open=False, className='mt-3')
             ])
         ])
     )

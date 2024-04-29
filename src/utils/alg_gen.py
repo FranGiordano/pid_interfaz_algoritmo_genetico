@@ -3,6 +3,10 @@ import random as rd
 from enum import Enum
 
 
+class ErrorPoblacionConIndividuosMuertos(Exception):
+    pass
+
+
 class Individuo:
 
     class Estado(Enum):
@@ -88,6 +92,7 @@ class Cruzador:
         self.__prob_ind_2 = rd.random()
         self.__bits_individuo_padre1 = None
         self.__bits_individuo_padre2 = None
+        self.__cruzo = None
         self.__nro_ind_padre1 = None
         self.__nro_ind_padre2 = None
         self.__punto_corte = None
@@ -114,6 +119,7 @@ class Cruzador:
             "probabilidad_cruce": self.__probabilidad_cruce,
             "probabilidad_mutacion": self.__probabilidad_mutacion,
             "prob_cruce": self.__prob_cruce,
+            "cruzo": self.__cruzo,
             "prob_ind_1": self.__prob_ind_1,
             "prob_ind_2": self.__prob_ind_2,
             "bits_individuo_padre1": self.__bits_individuo_padre1,
@@ -169,12 +175,14 @@ class Cruzador:
         if self.__prob_cruce >= self.__probabilidad_cruce:
             individuo_hijo1 = Individuo(self.__bits_individuo_padre1, self.__utilidades, self.__pesos, self.__peso_maximo)
             individuo_hijo2 = Individuo(self.__bits_individuo_padre2, self.__utilidades, self.__pesos, self.__peso_maximo)
+            self.__cruzo = False
         else:
             self.__punto_corte = rd.random()
             self.__bits_padre_1_izq, self.__bits_padre_1_der = self.__cortar_individuo(self.__bits_individuo_padre1, self.__punto_corte)
             self.__bits_padre_2_izq, self.__bits_padre_2_der = self.__cortar_individuo(self.__bits_individuo_padre2, self.__punto_corte)
             individuo_hijo1 = Individuo([*self.__bits_padre_1_izq, *self.__bits_padre_2_der], self.__utilidades, self.__pesos, self.__peso_maximo)
             individuo_hijo2 = Individuo([*self.__bits_padre_2_izq, *self.__bits_padre_1_der], self.__utilidades, self.__pesos, self.__peso_maximo)
+            self.__cruzo = True
 
         self.__probabilidad_mutaciones_1 = individuo_hijo1.mutar_individuo(self.__probabilidad_mutacion, self.__utilidades, self.__pesos, self.__peso_maximo)
         self.__probabilidad_mutaciones_2 = individuo_hijo2.mutar_individuo(self.__probabilidad_mutacion, self.__utilidades, self.__pesos, self.__peso_maximo)
@@ -195,7 +203,7 @@ class Poblacion:
 
         for individuo in [individuo1, individuo2, individuo3, individuo4]:
             if individuo.get_estado() == Individuo.Estado.MUERTO:
-                raise ValueError("No se puede crear una población con individuos muertos")
+                raise ErrorPoblacionConIndividuosMuertos("No se puede crear una población con individuos muertos")
 
         self.__individuos = [individuo1, individuo2, individuo3, individuo4]
         self.__nro_poblacion = nro_poblacion
