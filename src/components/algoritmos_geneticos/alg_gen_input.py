@@ -60,7 +60,7 @@ def alg_gen_input():
                                 dbc.FormFloating([
                                     dbc.Input(id="in_cantidad_iteraciones", placeholder="Cantidad de Iteraciones",
                                               type="number",
-                                              min=1, value=15, required=True, max=100, step=1),
+                                              min=1, value=50, required=True, max=100, step=1),
                                     dbc.Label("Cantidad de Iteraciones")
                                 ], className='mt-2')
                             )
