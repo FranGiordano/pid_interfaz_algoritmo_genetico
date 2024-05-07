@@ -64,7 +64,9 @@ def solucion(data):
                 dbc.Pagination(max_value=cantidad_iteraciones,
                                fully_expanded=False,
                                id='paginacion_iteraciones',
-                               className='justify-content-center'),
+                               className='justify-content-center',
+                               first_last=True, 
+                               previous_next=True),
                 html.Div(iteracion(poblaciones, cruces, nro_poblacion), id='resultado_iteracion')
             ])
         ]),
