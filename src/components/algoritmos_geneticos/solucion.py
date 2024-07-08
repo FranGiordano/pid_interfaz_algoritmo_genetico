@@ -28,7 +28,7 @@ def solucion(data):
     # Datos para la iteración 1
     poblaciones = data['Poblaciones']
     cruces = data['Cruces']
-    nro_poblacion = 1
+    nro_poblacion = 0
     cantidad_iteraciones = len(poblaciones) - 1
 
     resultado = [
@@ -37,13 +37,15 @@ def solucion(data):
 
         dbc.Row([
 
+            # make columns with same height
+
             dbc.Col([
                 card_solucion(individuo_solucion)
-            ], className='col-4'),
+            ], className='col-4 border-right equal-height-col'),
 
             dbc.Col([
                 card_evolucion(evolucion_x, evolucion_y, promedio_y)
-            ], className='col-8')
+            ], className='col-8 equal-height-col')
 
         ]),
 

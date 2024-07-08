@@ -21,7 +21,7 @@ def iteracion(poblaciones, cruces, nro_iteracion):
 
         html.Center(html.H4('Población de Padres')),
 
-        tabla_poblacion(poblaciones[nro_iteracion - 1]),
+        tabla_poblacion(poblaciones[nro_iteracion]),
 
         html.Br(),
 
@@ -31,7 +31,7 @@ def iteracion(poblaciones, cruces, nro_iteracion):
 
         html.Center(html.H4('Población de Hijos')),
 
-        tabla_poblacion(poblaciones[nro_iteracion]),
+        tabla_poblacion(poblaciones[nro_iteracion+1]),
 
     ], id='resultado-iteracion')
 

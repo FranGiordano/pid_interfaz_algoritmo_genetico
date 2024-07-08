@@ -3,14 +3,14 @@ import random as rd
 from enum import Enum
 
 
-class ErrorPoblacionConIndividuosMuertos(Exception):
+class ErrorPoblacionConIndividuosRechazados(Exception):
     pass
 
 
 class Individuo:
     class Estado(Enum):
-        VIVO = 1
-        MUERTO = 2
+        ACEPTADO = 1
+        RECHAZADO = 2
 
     # Constructor
     def __init__(self, bits, utilidades, pesos, peso_maximo):
@@ -38,9 +38,9 @@ class Individuo:
     # Metodos privados
     def __calcular_estado(self, peso_maximo):
         if self.__peso > peso_maximo:
-            return self.Estado.MUERTO
+            return self.Estado.RECHAZADO
         else:
-            return self.Estado.VIVO
+            return self.Estado.ACEPTADO
 
     def __calcular_utilidad(self, utilidades):
         return (self.__bit_1 * utilidades[0] +
@@ -106,8 +106,8 @@ class Cruzador:
         self.__bits_individuo_hijo2 = None
         self.__peso_hijo1 = None
         self.__peso_hijo2 = None
-        self.__hijo1_vivo = None
-        self.__hijo2_vivo = None
+        self.__hijo1_aceptado = None
+        self.__hijo2_aceptado = None
         self.__nro_hijo1 = None
         self.__nro_hijo2 = None
 
@@ -137,8 +137,8 @@ class Cruzador:
             "bits_individuo_hijo2": self.__bits_individuo_hijo2,
             "peso_hijo1": self.__peso_hijo1,
             "peso_hijo2": self.__peso_hijo2,
-            "hijo1_vivo": self.__hijo1_vivo,
-            "hijo2_vivo": self.__hijo2_vivo
+            "hijo1_aceptado": self.__hijo1_aceptado,
+            "hijo2_aceptado": self.__hijo2_aceptado
         }
         return data
 
@@ -202,8 +202,8 @@ class Cruzador:
         self.__bits_individuo_hijo2 = individuo_hijo2.get_bits()
         self.__peso_hijo1 = individuo_hijo1.get_peso()
         self.__peso_hijo2 = individuo_hijo2.get_peso()
-        self.__hijo1_vivo = individuo_hijo1.get_estado() == Individuo.Estado.VIVO
-        self.__hijo2_vivo = individuo_hijo2.get_estado() == Individuo.Estado.VIVO
+        self.__hijo1_aceptado = individuo_hijo1.get_estado() == Individuo.Estado.ACEPTADO
+        self.__hijo2_aceptado = individuo_hijo2.get_estado() == Individuo.Estado.ACEPTADO
 
         return individuo_hijo1, individuo_hijo2
 
@@ -214,8 +214,8 @@ class Poblacion:
     def __init__(self, individuo1, individuo2, individuo3, individuo4, nro_poblacion):
 
         for individuo in [individuo1, individuo2, individuo3, individuo4]:
-            if individuo.get_estado() == Individuo.Estado.MUERTO:
-                raise ErrorPoblacionConIndividuosMuertos("No se puede crear una población con individuos muertos")
+            if individuo.get_estado() == Individuo.Estado.RECHAZADO:
+                raise ErrorPoblacionConIndividuosRechazados("No se puede crear una población con individuos rechazados")
 
         self.__individuos = [individuo1, individuo2, individuo3, individuo4]
         self.__nro_poblacion = nro_poblacion
@@ -275,6 +275,8 @@ class Poblacion:
     def __calcular_probabilidades(self):
         utilidades = [individuo.get_utilidad() for individuo in self.__individuos]
         suma_utilidades = sum(utilidades)
+        if suma_utilidades == 0:
+            return [0, 0, 0, 0]
         return [utilidad / suma_utilidades for utilidad in utilidades]
 
     def __calcular_probabilidades_acumuladas(self):
@@ -309,7 +311,7 @@ class AlgGenMochila:
             'Cruces': [],
             'Solucion': None
         }
-        self.__crear_poblacion(self.__matriz_individuos, 1)
+        self.__crear_poblacion(self.__matriz_individuos, 0)
 
     # Getters
     def get_data(self):
@@ -326,14 +328,14 @@ class AlgGenMochila:
 
     def __iterate(self):
 
-        cantidad_hijos_vivos = 0
+        cantidad_hijos_aceptados = 0
         nro_cruce = 0
-        individuos_vivos = []
+        individuos_aceptados = []
         nro_poblacion_padres = self.__poblacion.get_nr_poblacion()
         individuos = self.__poblacion.get_copy_individuos()
         prob_acum = self.__poblacion.get_probabilidades_acumuladas()
 
-        while cantidad_hijos_vivos < 4:
+        while cantidad_hijos_aceptados < 4:
 
             nro_hijo1, nro_hijo2 = None, None
             nro_cruce += 1
@@ -345,20 +347,20 @@ class AlgGenMochila:
                                 nro_poblacion_padres,
                                 nro_cruce)
             hijo1, hijo2 = cruzador.cruzar(individuos, prob_acum)
-            if hijo1.get_estado() == Individuo.Estado.VIVO:
-                cantidad_hijos_vivos += 1
-                nro_hijo1 = cantidad_hijos_vivos
-                individuos_vivos.append(hijo1)
-            if hijo2.get_estado() == Individuo.Estado.VIVO:
-                individuos_vivos.append(hijo2)
-                cantidad_hijos_vivos += 1
-                nro_hijo2 = cantidad_hijos_vivos
+            if hijo1.get_estado() == Individuo.Estado.ACEPTADO:
+                cantidad_hijos_aceptados += 1
+                nro_hijo1 = cantidad_hijos_aceptados
+                individuos_aceptados.append(hijo1)
+            if hijo2.get_estado() == Individuo.Estado.ACEPTADO:
+                individuos_aceptados.append(hijo2)
+                cantidad_hijos_aceptados += 1
+                nro_hijo2 = cantidad_hijos_aceptados
             data_cruce = cruzador.get_data_cruce()
             data_cruce['nro_hijo1'] = nro_hijo1
             data_cruce['nro_hijo2'] = nro_hijo2
             self.__data['Cruces'].append(data_cruce)
 
-        self.__crear_poblacion([ind.get_bits() for ind in individuos_vivos], nro_poblacion_padres + 1)
+        self.__crear_poblacion([ind.get_bits() for ind in individuos_aceptados], nro_poblacion_padres + 1)
 
     # Metodos publicos
     def run(self, cantidad_iteraciones):

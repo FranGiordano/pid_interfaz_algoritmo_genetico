@@ -215,8 +215,8 @@
       ],
       "peso_hijo1": 7,
       "peso_hijo2": 3,
-      "hijo1_vivo": true,
-      "hijo2_vivo": true,
+      "hijo1_aceptado": true,
+      "hijo2_aceptado": true,
       "nro_hijo1": 1,
       "nro_hijo2": 2
     },
@@ -286,8 +286,8 @@
       ],
       "peso_hijo1": 7,
       "peso_hijo2": 3,
-      "hijo1_vivo": true,
-      "hijo2_vivo": true,
+      "hijo1_aceptado": true,
+      "hijo2_aceptado": true,
       "nro_hijo1": 3,
       "nro_hijo2": 4
     },
@@ -357,8 +357,8 @@
       ],
       "peso_hijo1": 6,
       "peso_hijo2": 0,
-      "hijo1_vivo": true,
-      "hijo2_vivo": true,
+      "hijo1_aceptado": true,
+      "hijo2_aceptado": true,
       "nro_hijo1": 1,
       "nro_hijo2": 2
     },
@@ -428,8 +428,8 @@
       ],
       "peso_hijo1": 8,
       "peso_hijo2": 3,
-      "hijo1_vivo": false,
-      "hijo2_vivo": true,
+      "hijo1_aceptado": false,
+      "hijo2_aceptado": true,
       "nro_hijo1": null,
       "nro_hijo2": 3
     },
@@ -499,8 +499,8 @@
       ],
       "peso_hijo1": 5,
       "peso_hijo2": 6,
-      "hijo1_vivo": true,
-      "hijo2_vivo": true,
+      "hijo1_aceptado": true,
+      "hijo2_aceptado": true,
       "nro_hijo1": 4,
       "nro_hijo2": 5
     }

@@ -5,10 +5,10 @@ import random as rd
 
 from components.algoritmos_geneticos.iteracion import iteracion
 from components.algoritmos_geneticos.solucion import solucion
-from src.components.algoritmos_geneticos.alg_gen_input import alg_gen_input
+from src.components.algoritmos_geneticos.ag_inputs import alg_gen_input
 from src.components.algoritmos_geneticos.ag_title import ag_title
 from src.components.algoritmos_geneticos.modal_video import modal_video
-from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosMuertos
+from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosRechazados
 
 dash.register_page(__name__,
                    path="/algoritmosgeneticos/",
@@ -23,7 +23,7 @@ layout = dbc.Container([
     alg_gen_input(),
     html.Div(id="output_alg_gen"),
     dcc.Store(id='data_store'),
-], style={'minWidth': '1400px'})
+], style={'minWidth': '1200px', 'maxWidth': '1200px'})
 
 
 # Mostrar modal
@@ -128,11 +128,11 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
 
     try:
         ag = AlgGenMochila(utilidades, pesos, peso_mochila, prob_cruce, prob_mutacion, matriz_individuos, semilla)
-    except ZeroDivisionError:
-        error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
-                 'Al menos un individuo debe tener un bit distinto de 0.')
-        return {}, "Ejecutar algoritmo", False, True, error, {}
-    except ErrorPoblacionConIndividuosMuertos:
+    # except ZeroDivisionError:
+    #     error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
+    #              'Al menos un individuo debe tener un bit distinto de 0.')
+    #     return {}, "Ejecutar algoritmo", False, True, error, {}
+    except ErrorPoblacionConIndividuosRechazados:
         error = ''
         for i in range(4):
             if sum([individuos[i]['1']*pesos[0], individuos[i]['2']*pesos[1], individuos[i]['3']*pesos[2], individuos[i]['4']*pesos[3]]) > peso_mochila:

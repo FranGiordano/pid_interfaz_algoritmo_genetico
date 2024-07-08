@@ -28,8 +28,8 @@ def card_cruce(cruce):
     bits_individuo_hijo2 = cruce['bits_individuo_hijo2']
     peso_hijo1 = cruce['peso_hijo1']
     peso_hijo2 = cruce['peso_hijo2']
-    hijo1_vivo = cruce['hijo1_vivo']
-    hijo2_vivo = cruce['hijo2_vivo']
+    hijo1_aceptado = cruce['hijo1_aceptado']
+    hijo2_aceptado = cruce['hijo2_aceptado']
     nro_hijo1 = cruce['nro_hijo1']
     nro_hijo2 = cruce['nro_hijo2']
 
@@ -191,7 +191,7 @@ def card_cruce(cruce):
                 dbc.Input(readonly=True, value=bits_individuo_hijo1[3],
                           className=f'p-2 {'text-danger' if probabilidad_mutaciones_1[3] < probabilidad_mutacion else ""}'),
                 dbc.InputGroupText('Peso'),
-                dbc.Input(readonly=True, value=peso_hijo1, className=f'p-2 {"text-success" if hijo1_vivo else "text-danger"}')
+                dbc.Input(readonly=True, value=peso_hijo1, className=f'p-2 {"text-success" if hijo1_aceptado else "text-danger"}')
             ], className="mr-auto p-2"),
 
         ], className='d-flex'),
@@ -225,7 +225,7 @@ def card_cruce(cruce):
                           className=f'p-2 {'text-danger' if probabilidad_mutaciones_2[3] < probabilidad_mutacion else ""}'),
                 dbc.InputGroupText('Peso'),
                 dbc.Input(readonly=True, value=peso_hijo2,
-                          className=f'p-2 {"text-success" if hijo2_vivo else "text-danger"}')
+                          className=f'p-2 {"text-success" if hijo2_aceptado else "text-danger"}')
             ], className="mr-auto p-2"),
 
         ], className='d-flex'),
@@ -238,25 +238,25 @@ def card_cruce(cruce):
             dbc.InputGroup([
                 dbc.InputGroupText('Hijo'),
                 dbc.Input(readonly=True, value=f"{'-' if nro_hijo1 is None else nro_hijo1}",
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}'),
             ], className="p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText('Estado'),
-                dbc.Input(readonly=True, value=f"{'Vivo' if hijo1_vivo else 'Muerto'}",
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}'),
+                dbc.Input(readonly=True, value=f"{'Aceptado' if hijo1_aceptado else 'Rechazado'}",
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}'),
             ], className="p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText('Bits'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo1[0],
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo1[1],
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo1[2],
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo1[3],
-                          className=f'p-2 {"text-danger" if not hijo1_vivo else "text-success"}')
+                          className=f'p-2 {"text-danger" if not hijo1_aceptado else "text-success"}')
             ], className="p-2")
 
         ], className='d-flex'),
@@ -266,25 +266,25 @@ def card_cruce(cruce):
             dbc.InputGroup([
                 dbc.InputGroupText('Hijo'),
                 dbc.Input(readonly=True, value=f"{'-' if nro_hijo2 is None else nro_hijo2}",
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}'),
             ], className="p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText('Estado'),
-                dbc.Input(readonly=True, value=f"{'Vivo' if hijo2_vivo else 'Muerto'}",
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}'),
+                dbc.Input(readonly=True, value=f"{'Aceptado' if hijo2_aceptado else 'Rechazado'}",
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}'),
             ], className="p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText('Bits'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo2[0],
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo2[1],
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo2[2],
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}'),
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}'),
                 dbc.Input(readonly=True, value=bits_individuo_hijo2[3],
-                          className=f'p-2 {"text-danger" if not hijo2_vivo else "text-success"}')
+                          className=f'p-2 {"text-danger" if not hijo2_aceptado else "text-success"}')
             ], className="p-2")
 
         ], className='d-flex'),
