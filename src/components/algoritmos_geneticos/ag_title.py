@@ -9,15 +9,20 @@ def ag_title():
         html.Div([
             html.H1(html.Strong('Algoritmos Genéticos')),
             html.H2('El Problema de la Mochila'),
-            dbc.Button(
-                "¿Cómo funciona?",
+            dbc.Button([
+                html.I(className="bi bi-play"),
+                " Video explicativo"
+                ],
                 id="btn_abrir_modal_video",
-                color="secondary",
+                color="danger",
             ),
-            dbc.Tooltip(
-                "¿Qué es el problema de la mochila?",
-                target="btn_abrir_modal_video",
-                placement='right'
+            dbc.Button([
+                html.I(className="bi bi-book"),
+                " Manual del simulador"
+            ],
+                id="btn_abrir_modal_manual",
+                color="secondary",
+                className='mx-2'
             )
         ], className='mx-2 p-2')
     ], className='d-flex justify-content-center')

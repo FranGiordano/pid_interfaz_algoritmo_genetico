@@ -11,27 +11,26 @@ def iteracion(poblaciones, cruces, nro_iteracion):
 
     cards_cruces = [card_cruce(cruce) for cruce in cruces_iteracion]
 
-    tabs_cruces = []
+    tabs = dbc.Tabs([], className='mx-5')
+
+    tab_poblacion_padre = dbc.Tab([dbc.Card([
+        tabla_poblacion(poblaciones[nro_iteracion])
+    ], className='mx-5 mt-3')], label='Población de Padres')
+
+    tabs.children.append(tab_poblacion_padre)
+
     for i, card in enumerate(cards_cruces):
-        tabs_cruces.append(dbc.Tab(card, label=f'Cruce {i+1}'))
+        tabs.children.append(dbc.Tab(card, label=f'Cruce {i+1}'))
+
+    tab_poblacion_hijo = dbc.Tab([dbc.Card([
+        tabla_poblacion(poblaciones[nro_iteracion+1])
+    ], className='mx-5 mt-3')], label='Población de Hijos')
+
+    tabs.children.append(tab_poblacion_hijo)
 
     resultado = html.Div([
 
-        html.Br(),
-
-        html.Center(html.H4('Población de Padres')),
-
-        tabla_poblacion(poblaciones[nro_iteracion]),
-
-        html.Br(),
-
-        dbc.Tabs(tabs_cruces, className='mx-5'),
-
-        html.Br(),
-
-        html.Center(html.H4('Población de Hijos')),
-
-        tabla_poblacion(poblaciones[nro_iteracion+1]),
+        tabs
 
     ], id='resultado-iteracion')
 

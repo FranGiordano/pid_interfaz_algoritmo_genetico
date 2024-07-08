@@ -30,10 +30,10 @@ def tabla_poblacion(poblacion_final):
                 {'field': '4', 'width': 90}
             ]
         },
-        {'field': 'Z', 'headerName': 'Utilidad', 'width': 100},
-        {'field': 'Peso', 'width': 100},
-        {'field': 'Prob', 'headerName': 'Probabilidad', 'valueFormatter': {"function":"""d3.format(",.2f")(params.value)"""}, 'width': 150},
-        {'field': 'Prob Acum', 'headerName': 'Prob Acumulada', 'valueFormatter': {"function":"""d3.format(",.2f")(params.value)"""}, 'width': 200},
+        {'field': 'Z', 'headerName': 'Utilidad Total', 'width': 125},
+        {'field': 'Peso', 'headerName': 'Peso Total', 'width': 125},
+        {'field': 'Prob', 'headerName': 'Probabilidad', 'valueFormatter': {"function":"""d3.format(",.2f")(params.value)"""}, 'width': 125},
+        {'field': 'Prob Acum', 'headerName': 'Prob Acumulada', 'valueFormatter': {"function":"""d3.format(",.2f")(params.value)"""}, 'width': 150},
     ]
 
     tabla = dag.AgGrid(
@@ -41,7 +41,7 @@ def tabla_poblacion(poblacion_final):
         rowData=data,
         columnSize="sizeToFit",
         dashGridOptions={"domLayout": "autoHeight"},
-        style={"height": None, 'width': '75%', 'margin': 'auto'},
+        style={"height": None, 'width': '100%', 'margin': 'auto'},
         defaultColDef={"resizable": False, "sortable": False, 'suppressMovable': True}
     )
 

@@ -10,24 +10,72 @@ def card_solucion(ind_solucion):
     peso = ind_solucion['Peso']
     nro_poblacion = ind_solucion['NroPoblacion']
 
+    objetos_elegidos = dbc.Row([])
+    for i in range(len(bits)):
+
+        if bits[i] == 1:
+
+            objeto = dbc.Col([
+
+                html.Center([
+                    html.Img(src=f'../assets/images/libro{i + 1}.png', style={'max-width': '50%'},
+                             className='mx-auto mb-2'),
+                    html.P(f"Objeto {i + 1}")
+                ])
+
+            ], className='col-2')
+
+            objetos_elegidos.children.append(objeto)
+
+        else:
+
+            objeto = dbc.Col([
+
+                html.Center([
+                    html.Img(src=f'../assets/images/libro{i + 1}.png', style={'max-width': '50%', 'opacity': '0.25'},
+                             className='mx-auto mb-2'),
+                    html.P(f"")
+                ])
+
+            ], className='col-2')
+
+            objetos_elegidos.children.append(objeto)
+
     card = dbc.Card([
-        dbc.CardHeader(html.Strong("Solución del Algoritmo")),
+
+        dbc.CardHeader(html.Strong("Mejor Individuo del Algoritmo")),
+
         dbc.CardBody([
-            html.P([f"El algoritmo propone al ", html.Strong(individuo),
-                    f" de la ", html.Strong(f"Población {nro_poblacion}"), " como solución al problema de la mochila."]),
-            html.Center(html.Img(src='../assets/images/dna.png', style={'width': '50%'})),
-            html.P(f'Este individuo eligió los siguientes objetos: '),
-            dbc.Checklist(
-                options=[
-                    {"label": "Objeto 1", "value": 1},
-                    {"label": "Objeto 2", "value": 2},
-                    {"label": "Objeto 3", "value": 3},
-                    {"label": "Objeto 4", "value": 4},
-                ],
-                value=[i for i in range(1, 5) if bits[i-1] == 1]
-            ),
-            html.P(f'Con una utilidad total de {utilidad} y un peso total de {peso}.', className='mt-2')
+
+            dbc.Row([
+
+                dbc.Col([
+
+                    html.Img(src='../assets/images/dna.png', style={'max-width': '100%'}, className='mx-auto mb-2'),
+
+                ], className='col-2', align='center'),
+
+                dbc.Col([
+
+                    html.P([f"El algoritmo propone al ", html.Strong(individuo),
+                            f" de la ", html.Strong(f"Población {nro_poblacion}"),
+                            " como solución al problema de la mochila."]),
+
+                    html.P(f'Este individuo eligió los siguientes objetos: '),
+
+                    objetos_elegidos,
+
+                    html.P([f'Con una ',
+                            html.Strong(f'utilidad total de {utilidad}'),
+                            ' y un ',
+                            html.Strong(f'peso total de {peso}'),
+                            '.'])
+
+                ], className='col-10')
+
+            ]),
+
         ])
-    ], className='h-100')
+    ])
 
     return card

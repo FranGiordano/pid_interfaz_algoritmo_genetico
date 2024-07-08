@@ -35,19 +35,11 @@ def solucion(data):
 
         html.Br(),
 
-        dbc.Row([
+        card_solucion(individuo_solucion),
 
-            # make columns with same height
+        html.Br(),
 
-            dbc.Col([
-                card_solucion(individuo_solucion)
-            ], className='col-4 border-right equal-height-col'),
-
-            dbc.Col([
-                card_evolucion(evolucion_x, evolucion_y, promedio_y)
-            ], className='col-8 equal-height-col')
-
-        ]),
+        card_evolucion(evolucion_x, evolucion_y, promedio_y),
 
         html.Br(),
 
@@ -55,7 +47,7 @@ def solucion(data):
             dbc.CardHeader(html.Strong("Población Final")),
             dbc.CardBody([
                 tabla_poblacion(poblacion_final)
-            ])
+            ], className='mx-5')
         ]),
 
         html.Br(),
@@ -67,11 +59,11 @@ def solucion(data):
                                fully_expanded=False,
                                id='paginacion_iteraciones',
                                className='justify-content-center',
-                               first_last=True, 
+                               first_last=True,
                                previous_next=True),
                 html.Div(iteracion(poblaciones, cruces, nro_poblacion), id='resultado_iteracion')
             ])
-        ]),
+        ], style={'minHeight': '1000px'}),
 
         html.Br(),
 

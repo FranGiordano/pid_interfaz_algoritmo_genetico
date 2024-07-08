@@ -256,7 +256,7 @@ class Poblacion:
     def get_data_mayor_utilidad(self):
 
         mayor_utilidad = 0
-        individuo_mayor_utilidad = None
+        individuo_mayor_utilidad = self.__individuos[0]
 
         for individuo in self.__individuos:
             if individuo.get_utilidad() > mayor_utilidad:
@@ -296,9 +296,10 @@ class AlgGenMochila:
                  probabilidad_cruce,
                  probabilidad_mutacion,
                  matriz_individuos,
-                 semilla):
+                 semilla=None):
 
-        rd.seed(semilla)
+        if semilla is not None:
+            rd.seed(semilla)
         self.__utilidades = utilidades
         self.__pesos = pesos
         self.__capacidad_mochila = capacidad_mochila
@@ -364,9 +365,17 @@ class AlgGenMochila:
 
     # Metodos publicos
     def run(self, cantidad_iteraciones):
+
+        mejor_individuo_alg = self.__poblacion.get_data_mayor_utilidad()
+
         for i in range(cantidad_iteraciones):
             self.__iterate()
-        self.__data['Solucion'] = self.__poblacion.get_data_mayor_utilidad()
+
+            mejor_individuo_poblacion = self.__poblacion.get_data_mayor_utilidad()
+            if mejor_individuo_poblacion['Utilidad'] > mejor_individuo_alg['Utilidad']:
+                mejor_individuo_alg = mejor_individuo_poblacion
+
+        self.__data['Solucion'] = mejor_individuo_alg
 
 
 if __name__ == '__main__':
