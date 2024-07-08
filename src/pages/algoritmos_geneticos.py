@@ -177,8 +177,6 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
 
     resultado = solucion(data)
 
-    time.sleep(3)
-
     return resultado, "Ejecutar algoritmo", False, False, '', data
 
 
