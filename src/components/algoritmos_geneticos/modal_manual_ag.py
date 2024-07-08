@@ -6,7 +6,7 @@ from dash import html
 def modal_manual_ag():
 
     modal = dbc.Modal([
-        dbc.ModalHeader(html.Strong("Manual del simulador")),
+        dbc.ModalHeader(html.Strong("Manual de usuario")),
 
         # leer pdf
 
