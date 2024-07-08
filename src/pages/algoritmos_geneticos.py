@@ -2,6 +2,7 @@ import dash
 from dash import html, callback, Input, Output, dcc, State
 import dash_bootstrap_components as dbc
 from dash.dependencies import ALL
+import time
 import random as rd
 
 from components.algoritmos_geneticos.iteracion import iteracion
@@ -175,6 +176,8 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
     data = ag.get_data()
 
     resultado = solucion(data)
+
+    time.sleep(3)
 
     return resultado, "Ejecutar algoritmo", False, False, '', data
 
