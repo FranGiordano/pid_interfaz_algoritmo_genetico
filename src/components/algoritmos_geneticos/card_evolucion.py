@@ -15,7 +15,7 @@ def card_evolucion(evolucion_x, evolucion_y, promedio_y):
     #figure.add_bar(x=evolucion_x, y=evolucion_y)
     figure.update_layout(xaxis_title='Nro. de Población', yaxis_title='Utilidad', margin=dict(l=20, r=20, t=20, b=20))
     card = dbc.Card([
-        dbc.CardHeader(html.Strong("Evolución del Individuo con Mayor Utilidad por Población")),
+        dbc.CardHeader(html.Strong("Evolución del individuo con mayor utilidad por población")),
         dbc.CardBody([
             dcc.Graph(figure=figure)
         ])

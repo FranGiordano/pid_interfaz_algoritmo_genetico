@@ -43,7 +43,7 @@ def card_solucion(ind_solucion):
 
     card = dbc.Card([
 
-        dbc.CardHeader(html.Strong("Mejor Individuo del Algoritmo")),
+        dbc.CardHeader(html.Strong("Mejor individuo del algoritmo")),
 
         dbc.CardBody([
 

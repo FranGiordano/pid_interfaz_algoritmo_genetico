@@ -44,7 +44,7 @@ def solucion(data):
         html.Br(),
 
         dbc.Card([
-            dbc.CardHeader(html.Strong("Población Final")),
+            dbc.CardHeader(html.Strong("Población final")),
             dbc.CardBody([
                 tabla_poblacion(poblacion_final)
             ], className='mx-5')
