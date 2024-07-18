@@ -91,15 +91,15 @@ def limpiar_datos(n_clicks):
 
 
 # Deshabilitar boton mientras se ejecuta algoritmo
-@callback(
-    Output("btn_alg_gen_ejecutar", "children", allow_duplicate=True),
-    Output("btn_alg_gen_ejecutar", "disabled", allow_duplicate=True),
-    Input("btn_alg_gen_ejecutar", "n_clicks"),
-    prevent_initial_call=True
-)
-def cargar_boton(n_clicks):
-    contenido_boton = [dbc.Spinner(size="sm"), " Ejecutando..."]
-    return contenido_boton, True
+# @callback(
+#     Output("btn_alg_gen_ejecutar", "children", allow_duplicate=True),
+#     Output("btn_alg_gen_ejecutar", "disabled", allow_duplicate=True),
+#     Input("btn_alg_gen_ejecutar", "n_clicks"),
+#     prevent_initial_call=True
+# )
+# def cargar_boton(n_clicks):
+#     contenido_boton = [dbc.Spinner(size="sm"), " Ejecutando..."]
+#     return contenido_boton, True
 
 
 # Ejecutar algoritmo y devolver resultados
