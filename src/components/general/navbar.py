@@ -14,12 +14,12 @@ def navbar() -> dbc.Navbar:
                     align="center",
                     className="g-0",
                 )),
-            dbc.NavItem(
-                dbc.NavLink(html.Strong('Inicio'), href="/"),
-                class_name="ms-auto px-3 text-primary"),
-            dbc.NavItem(
-                dbc.NavLink(html.Strong("Algoritmos Genéticos"), href="/algoritmosgeneticos/"),
-                class_name="px-3 text-primary")
+            # dbc.NavItem(
+            #     dbc.NavLink(html.Strong('Inicio'), href="/"),
+            #     class_name="ms-auto px-3 text-primary"),
+            # dbc.NavItem(
+            #     dbc.NavLink(html.Strong("Algoritmos Genéticos"), href="/algoritmosgeneticos/"),
+            #     class_name="px-3 text-primary")
         ], style={'maxWidth': '1200px', 'minWidth': '1200px'}), className='shadow-sm'
     )
     return barra_navegacion
