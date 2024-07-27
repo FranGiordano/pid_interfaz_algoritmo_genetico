@@ -90,6 +90,7 @@ def limpiar_datos(n_clicks):
     return data_individuos, data_objetos, None, None, None, None, {}, {}, "Ejecutar algoritmo", False
 
 
+# Añadir PopUp
 # Deshabilitar boton mientras se ejecuta algoritmo
 # @callback(
 #     Output("btn_alg_gen_ejecutar", "children", allow_duplicate=True),
