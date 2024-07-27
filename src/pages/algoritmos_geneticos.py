@@ -14,7 +14,7 @@ from src.components.algoritmos_geneticos.modal_manual_ag import modal_manual_ag
 from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosRechazados
 
 dash.register_page(__name__,
-                   path="/",
+                   path="/algoritmosgeneticos/",
                    title="Algoritmos Genéticos",
                    update_title="Algoritmos Genéticos",
                    name="Algoritmos Genéticos")
