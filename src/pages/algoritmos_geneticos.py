@@ -11,6 +11,7 @@ from src.components.algoritmos_geneticos.ag_inputs import alg_gen_input
 from src.components.algoritmos_geneticos.ag_title import ag_title
 from src.components.algoritmos_geneticos.modal_video import modal_video
 from src.components.algoritmos_geneticos.modal_manual_ag import modal_manual_ag
+from src.components.algoritmos_geneticos.toast_success import toast_success
 from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosRechazados
 
 dash.register_page(__name__,
@@ -27,6 +28,7 @@ layout = dbc.Container([
     alg_gen_input(),
     html.Div(id="output_alg_gen"),
     dcc.Store(id='data_store'),
+    toast_success()
 ], style={'minWidth': '1200px', 'maxWidth': '1200px'})
 
 
@@ -111,6 +113,7 @@ def limpiar_datos(n_clicks):
     Output('alert_alg_gen', 'is_open'),
     Output('alert_alg_gen', 'children'),
     Output('data_store', 'data'),
+    Output('toast_success', 'is_open'),
     Input("btn_alg_gen_ejecutar", "n_clicks"),
     State({'type': 'form_individuos', 'index': ALL}, 'value'),
     State("in_probabilidad_cruce", "value"),
@@ -128,29 +131,28 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
     except TypeError:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'Los objetos deben tener valores numéricos de utilidad y peso mayores a 0 y menores a 100.')
-        return {}, "Ejecutar algoritmo", False, True, error, {}
-
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     if None in (prob_cruce, prob_mutacion) or prob_cruce < 0 or prob_cruce > 1 or prob_mutacion < 0 or prob_mutacion > 1:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'Las probabilidades de cruce y mutación deben estar entre 0 y 1.')
-        return {}, "Ejecutar algoritmo", False, True, error, {}
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     if cant_iteraciones is None or cant_iteraciones < 1 or cant_iteraciones > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'La cantidad de iteraciones debe estar entre 1 y 100.')
-        return {}, "Ejecutar algoritmo", False, True, error, {}
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     if peso_mochila is None or peso_mochila < 1 or peso_mochila > 100:
         error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                  'El peso máximo de la mochila debe estar entre 1 y 100.')
-        return {}, "Ejecutar algoritmo", False, True, error, {}
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     for i in range(4):
         if 0 in (objetos[i]['Utilidad'], objetos[i]['Peso']):
             error = ('Ocurrió un error al intentar ejecutar el algoritmo. '
                      'Los objetos deben tener valores de utilidad y peso mayores a 0.')
-            return {}, "Ejecutar algoritmo", False, True, error, {}
+            return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     utilidades, pesos, matriz_individuos = [], [], []
 
@@ -167,18 +169,18 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
             if sum([individuos[0+4*i]*pesos[0], individuos[1+4*i]*pesos[1], individuos[2+4*i]*pesos[2], individuos[3+4*i]*pesos[3]]) > peso_mochila:
                 error = (f'Ocurrió un error al intentar ejecutar el algoritmo. '
                          f'El individuo {i+1} no debe superar el peso máximo de la mochila.')
-                return {}, "Ejecutar algoritmo", False, True, error, {}
-        return {}, "Ejecutar algoritmo", False, True, error, {}
+                return {}, "Ejecutar algoritmo", False, True, error, {}, False
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
     except Exception as e:
         error = f'Ocurrió un error al intentar ejecutar el algoritmo. {e}'
-        return {}, "Ejecutar algoritmo", False, True, error, {}
+        return {}, "Ejecutar algoritmo", False, True, error, {}, False
 
     ag.run(cant_iteraciones)
     data = ag.get_data()
 
     resultado = solucion(data)
 
-    return resultado, "Ejecutar algoritmo", False, False, '', data
+    return resultado, "Ejecutar algoritmo", False, False, '', data, True
 
 
 # Paginar iteraciones
