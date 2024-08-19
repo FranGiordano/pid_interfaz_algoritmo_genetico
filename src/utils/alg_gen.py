@@ -310,7 +310,9 @@ class AlgGenMochila:
         self.__data = {
             'Poblaciones': [],
             'Cruces': [],
-            'Solucion': None
+            'Solucion': None,
+            'Objetos': [{'Utilidad': utilidades[i], 'Peso': pesos[i]} for i in range(4)],
+            'Mochila': {'Capacidad': capacidad_mochila}
         }
         self.__crear_poblacion(self.__matriz_individuos, 0)
 

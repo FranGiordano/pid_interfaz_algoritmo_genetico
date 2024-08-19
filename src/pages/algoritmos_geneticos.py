@@ -71,6 +71,33 @@ def ocultar_modal_manual(n_clicks):
     return False
 
 
+# Generar bits aleatorios de tal forma que los individuos no superen el peso máximo de la mochila
+@callback(
+    Output({'type': 'form_individuos', 'index': ALL}, 'value'),
+    Input("btn_alg_gen_bits_random", 'n_clicks'),
+    State({'type': 'form_objetos', 'index': ALL}, 'value'),
+    State("in_peso_mochila", "value"),
+    prevent_initial_call=True
+)
+def generar_bits(n_clicks, objetos, capacidad_mochila):
+
+    while True:
+
+        bits_individuos = [str(rd.choice([0, 1])) for _ in range(16)]
+
+        bandera_peso = False
+
+        for i in range(4):
+            if sum([int(bits_individuos[0+4*i])*int(objetos[1]),
+                    int(bits_individuos[1+4*i])*int(objetos[3]),
+                    int(bits_individuos[2+4*i])*int(objetos[5]),
+                    int(bits_individuos[3+4*i])*int(objetos[7])]) > capacidad_mochila:
+                bandera_peso = True
+
+        if not bandera_peso:
+            return bits_individuos
+
+
 # Limpiar datos
 @callback(
     Output({'type': 'form_individuos', 'index': ALL}, 'value', allow_duplicate=True),
@@ -197,4 +224,8 @@ def paginar_iteraciones(pagina, data):
     if not data:
         return {}
 
-    return iteracion(data['Poblaciones'], data['Cruces'], pagina-1)
+    utilidades = [data['Objetos'][i]['Utilidad'] for i in range(4)]
+    pesos = [data['Objetos'][i]['Peso'] for i in range(4)]
+    mochila = data['Mochila']['Capacidad']
+
+    return iteracion(data['Poblaciones'], data['Cruces'], pagina-1, utilidades, pesos, mochila)

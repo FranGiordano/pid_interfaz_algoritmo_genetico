@@ -19,37 +19,37 @@ def alg_gen_input():
                         dbc.InputGroup([
                             dbc.InputGroupText("Objeto 1 - Utilidad", style={'width': '45%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'obj1'},
-                                        type="number", min=1, value=4, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                             dbc.InputGroupText("Peso", style={'width': '20%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'peso1'},
-                                        type="number", min=1, value=7, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                         ]),
 
                         dbc.InputGroup([
                             dbc.InputGroupText("Objeto 2 - Utilidad", style={'width': '45%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'obj2'},
-                                        type="number", min=1, value=5, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                             dbc.InputGroupText("Peso", style={'width': '20%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'peso2'},
-                                        type="number", min=1, value=6, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                         ], className='mt-2'),
 
                         dbc.InputGroup([
                             dbc.InputGroupText("Objeto 3 - Utilidad", style={'width': '45%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'obj3'},
-                                        type="number", min=1, value=6, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                             dbc.InputGroupText("Peso", style={'width': '20%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'peso3'},
-                                        type="number", min=1, value=8, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                         ], className='mt-2'),
 
                         dbc.InputGroup([
                             dbc.InputGroupText("Objeto 4 - Utilidad", style={'width': '45%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'obj4'},
-                                        type="number", min=1, value=3, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                             dbc.InputGroupText("Peso", style={'width': '20%'}),
                             dbc.Input(id={'type': 'form_objetos', 'index': 'peso4'},
-                                        type="number", min=1, value=2, max=100, required=True, step=1),
+                                        type="number", min=1, max=100, required=True, step=1),
                         ], className='mt-2'),
 
                         # tabla_objetos()
@@ -103,52 +103,55 @@ def alg_gen_input():
                         dbc.InputGroup([
                             dbc.InputGroupText("Peso máximo de la mochila", style={'width': '60%'}),
                             dbc.Input(id="in_peso_mochila", placeholder="1 ≤ x ≤ 100",
-                                      type="number", min=1, value=15, max=100, required=True, step=1),
+                                      type="number", min=1, max=100, required=True, step=1),
                         ]),
 
                         # Probabilidad de cruce
                         dbc.InputGroup([
                             dbc.InputGroupText("Probabilidad de cruce", style={'width': '60%'}),
                             dbc.Input(id="in_probabilidad_cruce", placeholder="0 ≤ x ≤ 1",
-                                      type="number", min=0, value=0.98, required=True, max=1, step=0.01),
+                                      type="number", min=0, required=True, max=1, step=0.01),
                         ], className='mt-2'),
 
                         # Probabilidad de mutacion
                         dbc.InputGroup([
                             dbc.InputGroupText("Probabilidad de mutación", style={'width': '60%'}),
                             dbc.Input(id="in_probabilidad_mutacion", placeholder="0 ≤ x ≤ 1",
-                                      type="number", min=0, value=0.1, required=True, max=1, step=0.01),
+                                      type="number", min=0, required=True, max=1, step=0.01),
                         ], className='mt-2'),
 
                         # Cantidad de Iteraciones
                         dbc.InputGroup([
                             dbc.InputGroupText("Cantidad de iteraciones", style={'width': '60%'}),
                             dbc.Input(id="in_cantidad_iteraciones", placeholder="1 ≤ x ≤ 100",
-                                      type="number", min=1, value=100, required=True, max=100, step=1),
-                        ], className='mt-2'),
-
-                        # Botones
-                        dbc.Row([
-
-                            dbc.Col([
-                                dbc.Button("Limpiar simulador",
-                                           id="btn_alg_gen_limpiar",
-                                           color="secondary",
-                                           className='w-100'),
-                            ]),
-
-                            dbc.Col([
-                                dbc.Button("Ejecutar simulador",
-                                           id="btn_alg_gen_ejecutar",
-                                           color="primary",
-                                           className='w-100')
-                            ])
-
+                                      type="number", min=1, required=True, max=100, step=1),
                         ], className='mt-2'),
 
                     ], className='col-4')
 
                 ]),
+
+                # Botones
+                html.Div([
+
+                    dbc.Button("Generar bits aleatorios",
+                               id="btn_alg_gen_bits_random",
+                               color="secondary",
+                               className='w-35'
+                               ),
+
+                    dbc.Button("Limpiar simulador",
+                               id="btn_alg_gen_limpiar",
+                               color="secondary",
+                               className='w-35 mx-2'),
+
+                    dbc.Button("Ejecutar simulador",
+                               id="btn_alg_gen_ejecutar",
+                               color="primary",
+                               className='w-35')
+
+                ], className='mt-2 d-grid d-md-flex justify-content-md-end'),
+
                 dbc.Alert('', id='alert_alg_gen', dismissable=True, color='danger', is_open=False, className='mt-3')
             ])
         ])

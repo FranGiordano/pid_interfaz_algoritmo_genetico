@@ -31,24 +31,11 @@ def solucion(data):
     nro_poblacion = 0
     cantidad_iteraciones = len(poblaciones) - 1
 
+    utilidades = [data['Objetos'][i]['Utilidad'] for i in range(4)]
+    pesos = [data['Objetos'][i]['Peso'] for i in range(4)]
+    mochila = data['Mochila']['Capacidad']
+
     resultado = [
-
-        html.Br(),
-
-        card_solucion(individuo_solucion),
-
-        html.Br(),
-
-        card_evolucion(evolucion_x, evolucion_y, promedio_y),
-
-        html.Br(),
-
-        dbc.Card([
-            dbc.CardHeader(html.Strong("Población final")),
-            dbc.CardBody([
-                tabla_poblacion(poblacion_final)
-            ], className='mx-5')
-        ]),
 
         html.Br(),
 
@@ -61,9 +48,26 @@ def solucion(data):
                                className='justify-content-center',
                                first_last=True,
                                previous_next=True),
-                html.Div(iteracion(poblaciones, cruces, nro_poblacion), id='resultado_iteracion')
+                html.Div(iteracion(poblaciones, cruces, nro_poblacion, utilidades, pesos, mochila), id='resultado_iteracion')
             ])
-        ], style={'minHeight': '1000px'}),
+        ]),
+
+        html.Br(),
+
+        dbc.Card([
+            dbc.CardHeader(html.Strong("Población final")),
+            dbc.CardBody([
+                tabla_poblacion(poblacion_final)
+            ], className='mx-5')
+        ]),
+
+        html.Br(),
+
+        card_solucion(individuo_solucion),
+
+        html.Br(),
+
+        card_evolucion(evolucion_x, evolucion_y, promedio_y),
 
         html.Br(),
 

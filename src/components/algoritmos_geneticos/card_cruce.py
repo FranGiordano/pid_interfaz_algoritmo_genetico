@@ -42,23 +42,23 @@ def card_cruce(cruce):
         ]
         if bits_padre_1_izq is not None:
             for i in bits_padre_1_izq:
-                input_group_cruce1.append(dbc.Input(readonly=True, value=i, className='p-2 text-success'))
+                input_group_cruce1.append(dbc.Input(readonly=True, value=i, className='p-2'))
             for i in bits_padre_2_der:
-                input_group_cruce1.append(dbc.Input(readonly=True, value=i, className='p-2 text-primary'))
+                input_group_cruce1.append(dbc.Input(readonly=True, value=i, className='p-2'))
 
         input_group_cruce2 = [
             dbc.InputGroupText("Bits Cruce 2")
         ]
         for i in bits_padre_2_izq:
-            input_group_cruce2.append(dbc.Input(readonly=True, value=i, className='p-2 text-primary'))
+            input_group_cruce2.append(dbc.Input(readonly=True, value=i, className='p-2'))
         for i in bits_padre_1_der:
-            input_group_cruce2.append(dbc.Input(readonly=True, value=i, className='p-2 text-success'))
+            input_group_cruce2.append(dbc.Input(readonly=True, value=i, className='p-2'))
 
         div_hijo1 = [
 
             dbc.InputGroup([
                 dbc.InputGroupText("Punto de Corte"),
-                dbc.Input(readonly=True, value=round(punto_corte, 2), className='p-2')
+                dbc.Input(readonly=True, value=round(punto_corte, 2), className='p-2 text-primary')
             ], className="p-2"),
 
             dbc.InputGroup(input_group_cruce1, className="p-2"),
@@ -93,21 +93,21 @@ def card_cruce(cruce):
         html.Div([
 
             dbc.InputGroup([
-                dbc.InputGroupText("Prob Padre 1"),
-                dbc.Input(readonly=True, value=round(prob_ind_1, 2), className='p-2')
+                dbc.InputGroupText("Probabilidad padre 1"),
+                dbc.Input(readonly=True, value=round(prob_ind_1, 2), className='p-2 text-primary')
             ], className="mr-auto p-2"),
 
             dbc.InputGroup([
-                dbc.InputGroupText("Individuo"),
+                dbc.InputGroupText("Individuo elegido"),
                 dbc.Input(readonly=True, value=nro_ind_padre1, className='p-2')
             ], className="mr-auto p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText("Bits"),
-                dbc.Input(readonly=True, value=bits_individuo_padre1[0], className='p-2 text-success'),
-                dbc.Input(readonly=True, value=bits_individuo_padre1[1], className='p-2 text-success'),
-                dbc.Input(readonly=True, value=bits_individuo_padre1[2], className='p-2 text-success'),
-                dbc.Input(readonly=True, value=bits_individuo_padre1[3], className='p-2 text-success')
+                dbc.Input(readonly=True, value=bits_individuo_padre1[0], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre1[1], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre1[2], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre1[3], className='p-2')
             ], className="mr-auto p-2"),
 
         ], className='d-flex'),
@@ -115,21 +115,21 @@ def card_cruce(cruce):
         html.Div([
 
             dbc.InputGroup([
-                dbc.InputGroupText("Prob Padre 2"),
-                dbc.Input(readonly=True, value=round(prob_ind_2, 2), className='p-2')
+                dbc.InputGroupText("Probabilidad padre 2"),
+                dbc.Input(readonly=True, value=round(prob_ind_2, 2), className='p-2 text-primary')
             ], className="mr-auto p-2"),
 
             dbc.InputGroup([
-                dbc.InputGroupText("Individuo"),
+                dbc.InputGroupText("Individuo elegido"),
                 dbc.Input(readonly=True, value=nro_ind_padre2, className='p-2')
             ], className="mr-auto p-2"),
 
             dbc.InputGroup([
                 dbc.InputGroupText("Bits"),
-                dbc.Input(readonly=True, value=bits_individuo_padre2[0], className='p-2 text-primary'),
-                dbc.Input(readonly=True, value=bits_individuo_padre2[1], className='p-2 text-primary'),
-                dbc.Input(readonly=True, value=bits_individuo_padre2[2], className='p-2 text-primary'),
-                dbc.Input(readonly=True, value=bits_individuo_padre2[3], className='p-2 text-primary')
+                dbc.Input(readonly=True, value=bits_individuo_padre2[0], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre2[1], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre2[2], className='p-2'),
+                dbc.Input(readonly=True, value=bits_individuo_padre2[3], className='p-2')
             ], className="mr-auto p-2"),
 
         ], className='d-flex'),
@@ -141,9 +141,9 @@ def card_cruce(cruce):
         html.Div([
 
             dbc.InputGroup([
-                dbc.InputGroupText("Prob de Cruce"),
-                dbc.Input(readonly=True, value=round(prob_cruce, 2), className='p-2'),
-                dbc.InputGroupText('> <'),
+                dbc.InputGroupText("Probabilidad de Cruce"),
+                dbc.Input(readonly=True, value=round(prob_cruce, 2), className='p-2 text-primary'),
+                dbc.InputGroupText('<'),
                 dbc.Input(readonly=True, value=round(probabilidad_cruce, 2), className='p-2')
             ], className="mr-auto p-2"),
 
@@ -169,14 +169,14 @@ def card_cruce(cruce):
             dbc.InputGroup([
                 dbc.InputGroupText("Prob Mutación Hijo 1"),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_1[0], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_1[1], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_1[2], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_1[3], 2),
-                          className='p-2'),
-                dbc.InputGroupText('> <'),
+                          className='p-2 text-primary'),
+                dbc.InputGroupText('<'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutacion, 2), className='p-2')
             ], className="mr-auto p-2"),
 
@@ -201,14 +201,14 @@ def card_cruce(cruce):
             dbc.InputGroup([
                 dbc.InputGroupText("Prob Mutación Hijo 2"),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_2[0], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_2[1], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_2[2], 2),
-                          className='p-2'),
+                          className='p-2 text-primary'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutaciones_2[3], 2),
-                          className='p-2'),
-                dbc.InputGroupText('> <'),
+                          className='p-2 text-primary'),
+                dbc.InputGroupText('<'),
                 dbc.Input(readonly=True, value=round(probabilidad_mutacion, 2),
                           className='p-2')
             ], className="mr-auto p-2"),
