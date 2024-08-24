@@ -2,11 +2,11 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, html
 
 
-def toast_success():
+def toast_simulations():
 
     toast = dbc.Toast(
         "Simulación generada con éxito",
-        id="toast_success",
+        id="toast_simulations",
         header="Simulación",
         is_open=False,
         dismissable=True,

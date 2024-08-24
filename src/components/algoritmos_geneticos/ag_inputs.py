@@ -137,7 +137,8 @@ def alg_gen_input():
                     dbc.Button("Generar bits aleatorios",
                                id="btn_alg_gen_bits_random",
                                color="secondary",
-                               className='w-35'
+                               className='w-35',
+                               # disabled=True
                                ),
 
                     dbc.Button("Limpiar simulador",
