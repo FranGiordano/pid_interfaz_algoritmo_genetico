@@ -12,8 +12,7 @@ app = Dash(__name__,
             meta_tags=[{"name": "viewport", "content": "width=device-width"}],
            external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP],
            use_pages=True,
-           suppress_callback_exceptions=True
-           )
+            )
 
 app._favicon = "/assets/icons/favicon.ico"
 

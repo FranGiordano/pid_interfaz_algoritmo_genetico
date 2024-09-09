@@ -1,10 +1,7 @@
-from multiprocessing.managers import Value
-
 import dash
-from dash import html, callback, Input, Output, dcc, State, clientside_callback
+from dash import html, callback, Input, Output, dcc, State
 import dash_bootstrap_components as dbc
 from dash.dependencies import ALL
-import time
 import random as rd
 
 from components.algoritmos_geneticos.iteracion import iteracion
@@ -158,7 +155,11 @@ def limpiar_datos(n_clicks):
     State("in_cantidad_iteraciones", "value"),
     State({'type': 'form_objetos', 'index': ALL}, 'value'),
     State('in_peso_mochila', 'value'),
-    prevent_initial_call=True
+    prevent_initial_call=True,
+    running=[
+        (Output('btn_alg_gen_ejecutar', 'disabled'), True, False),
+        (Output('btn_alg_gen_ejecutar', 'children'), ' Ejecutando...', ' Ejecutar simulador'),
+    ]
 )
 def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_iteraciones, objetos, peso_mochila):
 
@@ -194,6 +195,10 @@ def ejecutar_algoritmo(n_clicks, individuos, prob_cruce, prob_mutacion, cant_ite
             utilidades.append(objetos[i]['Utilidad'])
             pesos.append(objetos[i]['Peso'])
             matriz_individuos.append([individuos[0+4*i], individuos[1+4*i], individuos[2+4*i], individuos[3+4*i]])
+
+        if pesos[0] > peso_mochila and pesos[1] > peso_mochila and pesos[2] > peso_mochila and pesos[3] > peso_mochila:
+            raise ValueError('Ocurrió un error al intentar ejecutar el algoritmo. '
+                             'Al menos uno de los objetos debe tener un peso menor al peso máximo de la mochila.')
 
         ag = AlgGenMochila(utilidades, pesos, peso_mochila, prob_cruce, prob_mutacion, matriz_individuos)
         ag.run(cant_iteraciones)
