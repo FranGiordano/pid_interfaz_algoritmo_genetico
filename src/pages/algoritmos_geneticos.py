@@ -6,11 +6,11 @@ import random as rd
 
 from components.algoritmos_geneticos.iteracion import iteracion
 from components.algoritmos_geneticos.solucion import solucion
-from src.components.algoritmos_geneticos.ag_inputs import alg_gen_input
-from src.components.algoritmos_geneticos.ag_title import ag_title
-from src.components.algoritmos_geneticos.modal_video import modal_video
-from src.components.algoritmos_geneticos.modal_manual_ag import modal_manual_ag
-from src.components.algoritmos_geneticos.toast_simulations import toast_simulations
+from components.algoritmos_geneticos.ag_inputs import alg_gen_input
+from components.algoritmos_geneticos.ag_title import ag_title
+from components.algoritmos_geneticos.modal_video import modal_video
+from components.algoritmos_geneticos.modal_manual_ag import modal_manual_ag
+from components.algoritmos_geneticos.toast_simulations import toast_simulations
 from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosRechazados
 
 dash.register_page(__name__,
