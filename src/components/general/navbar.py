@@ -9,16 +9,16 @@ def navbar() -> dbc.Navbar:
             dbc.NavItem(
                 dbc.Row(
                     [
-                        html.Img(src="/assets/images/utn.png", height="50px")
+                        html.Img(src="/algoritmosgeneticos/assets/images/utn.png", height="50px")
                     ],
                     align="center",
                     className="g-0",
                 )),
             dbc.NavItem(
-                dbc.NavLink(html.Strong('Inicio'), href="/"),
+                dbc.NavLink(html.Strong('Inicio'), href="/algoritmosgeneticos/"),
                 class_name="ms-auto px-3 text-primary"),
             dbc.NavItem(
-                dbc.NavLink(html.Strong("Algoritmos Genéticos"), href="/algoritmosgeneticos/"),
+                dbc.NavLink(html.Strong("Algoritmos Genéticos"), href="/algoritmosgeneticos/simulador/"),
                 class_name="px-3 text-primary")
         ], style={'maxWidth': '1200px', 'minWidth': '1200px'}), className='shadow-sm'
     )

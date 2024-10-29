@@ -18,7 +18,7 @@ def card_solucion(ind_solucion):
             objeto = dbc.Col([
 
                 html.Center([
-                    html.Img(src=f'../assets/images/libro{i + 1}.png', style={'max-width': '50%'},
+                    html.Img(src=f'/algoritmosgeneticos/assets/images/libro{i + 1}.png', style={'max-width': '50%'},
                              className='mx-auto mb-2'),
                     html.P(f"Objeto {i + 1}")
                 ])
@@ -32,7 +32,7 @@ def card_solucion(ind_solucion):
             objeto = dbc.Col([
 
                 html.Center([
-                    html.Img(src=f'../assets/images/libro{i + 1}.png', style={'max-width': '50%', 'opacity': '0.25'},
+                    html.Img(src=f'/algoritmosgeneticos/assets/images/libro{i + 1}.png', style={'max-width': '50%', 'opacity': '0.25'},
                              className='mx-auto mb-2'),
                     html.P(f"")
                 ])
@@ -51,7 +51,7 @@ def card_solucion(ind_solucion):
 
                 dbc.Col([
 
-                    html.Img(src='../assets/images/dna.png', style={'max-width': '100%'}, className='mx-auto mb-2'),
+                    html.Img(src='/algoritmosgeneticos/assets/images/dna.png', style={'max-width': '100%'}, className='mx-auto mb-2'),
 
                 ], className='col-2', align='center'),
 

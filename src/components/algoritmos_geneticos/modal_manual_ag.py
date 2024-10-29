@@ -12,7 +12,7 @@ def modal_manual_ag():
 
         dbc.ModalBody([
 
-            html.Iframe(src='../assets/docs/manual.pdf', style={'width': '100%', 'height': '600px'})
+            html.Iframe(src='/algoritmosgeneticos/assets/docs/manual.pdf', style={'width': '100%', 'height': '600px'})
 
         ]),
 

@@ -12,6 +12,8 @@ app = Dash(__name__,
             meta_tags=[{"name": "viewport", "content": "width=device-width"}],
            external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP],
            use_pages=True,
+           requests_pathname_prefix="/algoritmosgeneticos/",
+           routes_pathname_prefix="/algoritmosgeneticos/"
             )
 
 app._favicon = "/assets/icons/favicon.ico"

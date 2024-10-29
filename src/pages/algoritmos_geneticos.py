@@ -14,7 +14,7 @@ from components.algoritmos_geneticos.toast_simulations import toast_simulations
 from utils.alg_gen import AlgGenMochila, ErrorPoblacionConIndividuosRechazados
 
 dash.register_page(__name__,
-                   path="/algoritmosgeneticos/",
+                   path="/simulador/",
                    title="Algoritmos Genéticos",
                    update_title="Algoritmos Genéticos",
                    name="Algoritmos Genéticos")

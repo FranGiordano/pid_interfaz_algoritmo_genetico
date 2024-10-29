@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 
 def ag_title():
     titulo = html.Div([
-        html.Img(src="../assets/images/backpack.png", style={"width": "15%"}, className='d-inline-block'),
+        html.Img(src="/algoritmosgeneticos/assets/images/backpack.png", style={"width": "15%"}, className='d-inline-block'),
 
         html.Div([
             html.H1(html.Strong('Algoritmos Genéticos')),
