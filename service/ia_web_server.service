@@ -2,8 +2,8 @@
 Description=Run IA Web Server
 
 [Service]
-ExecStart=/usr/bin/sudo /usr/bin/python3 /home/solariaga/proyecto/src/app.py
-WorkingDirectory=/home/solariaga/proyecto
+ExecStart=/usr/bin/sudo /usr/local/bin/gunicorn --workers 3 --bind 0.0.0.0:80 app:server
+WorkingDirectory=/home/solariaga/proyecto/src
 User=solariaga
 Restart=always
 
